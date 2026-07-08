@@ -1,69 +1,67 @@
-[Bestbuy Scraper](https://apify.com/fatihai-tools/bestbuy-scraper?fpr=data)
+[Bestbuy Scraper](https://apify.com/benthepythondev/bestbuy-scraper?fpr=data)
 
-# Best Buy Scraper - Product Data Extraction
+# Best Buy Scraper
 
-This scraper extracts product data from Best Buy's public pages, including product names, prices, and availability. It's useful for businesses that need to monitor product prices or gather market research data.
+Extract product data from Best Buy including prices, deals, ratings, reviews, specifications, and availability.
 
 ## Features
 
-- Fast and efficient scraping using got-scraping
-- Built-in proxy support to avoid blocks
-- Automatic pagination handling
-- Pay-per-result pricing (only pay for what you get)
-- Rate limiting to respect target site
-- Retry logic for reliability
-
-## Output Data
-
-Each result contains:
-
-- **product_name**
-- **price**
-- **availability**
-- **product_id**
-- **brand**
-- **model**
+- **Search Mode**: Search products by keywords with filters
+- **Category Mode**: Scrape entire product categories
+- **Direct URLs Mode**: Scrape specific product pages
+- **Price Filtering**: Set min/max price range
+- **Brand Filtering**: Filter by specific brands
+- **Rating Filtering**: Only get products above a minimum rating
+- **Deal Hunting**: Filter for on-sale or open-box items only
+- **Detailed Specs**: Optionally scrape full product specifications
 
 ## Use Cases
 
-- Market research
-- Price monitoring
+- **Price Monitoring**: Track Best Buy prices for price drop alerts
+- **Market Research**: Analyze product pricing and ratings
+- **Competitor Analysis**: Compare electronics pricing
+- **Deal Hunting**: Find the best sales and open-box deals
+- **Inventory Tracking**: Monitor product availability
 
-## Input Parameters
+## Output Data
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `searchQuery` | string | Search term to find items |
-| `maxItems` | integer | Maximum results (default: 100) |
-| `proxy` | object | Proxy configuration |
+Each product includes:
 
-## Example Output
+| Field | Description |
+| --- | --- |
+| skuId | Best Buy SKU ID |
+| title | Product name |
+| brand | Brand name |
+| modelNumber | Model number |
+| price | Current price |
+| originalPrice | Regular price (if on sale) |
+| savings | Dollar savings |
+| savingsPercent | Percentage savings |
+| onSale | Whether item is on sale |
+| rating | Customer rating (1-5) |
+| reviewCount | Number of reviews |
+| url | Product page URL |
+| imageUrl | Main product image |
+| availability | Pickup/shipping availability |
+| specifications | Detailed specs (if enabled) |
+| features | Product features list |
+| scrapedAt | Timestamp |
+
+## Example Input
 
 ```
 {
-    "product_name": "example value",
-    "price": "example value",
-    "availability": "example value",
-    "product_id": "example value",
-    "brand": "example value",
-    "model": "example value",
-    "scrapedAt": "2026-02-22T12:00:00.000Z"
+  "mode": "search",
+  "searchQuery": "gaming laptop",
+  "minPrice": 800,
+  "maxPrice": 1500,
+  "brands": ["ASUS", "MSI", "Razer"],
+  "minRating": 4,
+  "onSaleOnly": true,
+  "maxProducts": 50
 }
 ```
 
 ## Pricing
 
-This actor uses pay-per-result pricing:
-
-- **$0.01 per result** - you only pay for scraped data
-- **$0.05 per actor start**
-
-## Tips
-
-- Start with a small `maxItems` (10-20) to test
-- Use proxy for best results and to avoid rate limits
-- The scraper respects rate limits automatically
-
-## Support
-
-If you have any issues, please open an issue on the actor page.
+Pay only for results - $5.00 per 1,000 products scraped.
